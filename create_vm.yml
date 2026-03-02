@@ -1,0 +1,16 @@
+---
+- name: Создание виртуальной машины в Proxmox
+  hosts: proxmox
+  gather_facts: false
+  tasks:
+    - name: Создать новую ВМ из шаблона 9000
+      community.general.proxmox_kvm:
+        api_user: "root@pam"
+        api_password: "Admin123!"
+        api_host: "192.168.10.128"
+        node: "pve"
+        name: "test-ansible-vm"
+        clone: "ubuntu-template"
+        newid: 200
+        timeout: 600
+      delegate_to: localhost
